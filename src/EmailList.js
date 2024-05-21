@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./EmailList.css";
 import { Checkbox, IconButton } from "@mui/material";
 import {
@@ -15,8 +15,34 @@ import {
 } from "@mui/icons-material";
 import Section from "./Section";
 import EmailRow from "./EmailRow";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 
 const EmailList = () => {
+  const [emails, setEmails] = useState([]);
+
+  const emailCollectionRef = collection(db, "emails");
+
+  useEffect(() => {
+    const getEmailList = async () => {
+      try {
+        const data = await getDocs(emailCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setEmails(filteredData);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    getEmailList();
+  }, [emailCollectionRef]);
+
+  useEffect(() => {
+    console.log(emails);
+  }, []);
   return (
     <div className="emailList">
       <div className="emailList__settings">
@@ -54,12 +80,16 @@ const EmailList = () => {
       </div>
 
       <div className="emaiList__list">
-        <EmailRow
-          title="twitch"
-          subject="hello my mentor"
-          description="hoping i can make me proud, this has been quite a struggle"
-          time="10pm"
-        />
+        {emails.map(({ id, to, subject, message, timestamp }) => (
+          <EmailRow
+            id={id}
+            key={id}
+            title={to}
+            subject={subject}
+            description={message}
+            time={new Date(timestamp?.seconds * 1000).toUTCString()}
+          />
+        ))}
       </div>
     </div>
   );

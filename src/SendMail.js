@@ -1,6 +1,6 @@
 import React from "react";
 import "./SendMail.css";
-import { Close } from "@mui/icons-material";
+import { Close, TrySharp } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import {
@@ -8,6 +8,8 @@ import {
   selectSendMessageIsOpen,
 } from "./features/mailSlice";
 import { useDispatch } from "react-redux";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "./firebase";
 
 const SendMail = () => {
   const {
@@ -18,9 +20,21 @@ const SendMail = () => {
   } = useForm();
   const dispatch = useDispatch();
 
-  // const onSubmit = (formData) => {
-  //   console.log(formData);
-  // };
+  const onSubmit = (formData) => {
+    try {
+      addDoc(collection(db, "emails"), {
+        to: formData.to,
+        subject: formData.subject,
+        message: formData.message,
+        timestamp: serverTimestamp(),
+      });
+
+      dispatch(closeSendMessage());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className="sendMail">
       <div className="sendMail__header">
@@ -32,7 +46,7 @@ const SendMail = () => {
         />
       </div>
 
-      <form onSubmit={handleSubmit(selectSendMessageIsOpen)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register("to", { required: true })}
           placeholder="To"
