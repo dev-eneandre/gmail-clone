@@ -4,7 +4,7 @@ import "./SidebarOption.css";
 const SidebarOption = ({ Icon, title, number, selected }) => {
   return (
     <div className={`sidebarOption ${selected && "sidebarOption--active"} `}>
-      <Icon />
+      <Icon className="sidebarIcon" />
       <h3>{title}</h3>
       <p>{number}</p>
     </div>

@@ -13,10 +13,10 @@ import {
   People,
   LocalOffer,
 } from "@mui/icons-material";
-import Section from "./Section";
-import EmailRow from "./EmailRow";
+import Section from "../Section/Section";
+import EmailRow from "../EmailRow/EmailRow";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../../firebase";
 
 const EmailList = () => {
   const [emails, setEmails] = useState([]);

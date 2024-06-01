@@ -1,10 +1,10 @@
 import React from "react";
 import "./Login.css";
 import { Button } from "@mui/material";
-import { auth, provider } from "./firebase";
+import { auth, provider } from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { login } from "./features/userSlice";
+import { login } from "../../features/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch();

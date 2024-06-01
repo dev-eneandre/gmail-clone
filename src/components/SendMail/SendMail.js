@@ -6,10 +6,10 @@ import { useForm } from "react-hook-form";
 import {
   closeSendMessage,
   selectSendMessageIsOpen,
-} from "./features/mailSlice";
+} from "../../features/mailSlice";
 import { useDispatch } from "react-redux";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../../firebase";
 
 const SendMail = () => {
   const {
