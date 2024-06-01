@@ -1,10 +1,17 @@
 .emailRow {
   display: flex;
   align-items: center;
-  height: 50px;
   border-bottom: 1px solid whitesmoke;
   cursor: pointer;
   z-index: 999;
+  border-top: 1px solid transparent;
+}
+.emailRow__message__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .emailRow:hover {
   border-top: 1px solid whitesmoke;
@@ -12,11 +19,15 @@
 }
 .emailRow__options {
   display: flex;
+  height: 45px;
 }
 .emailRow__message {
   display: flex;
   flex: 0.8;
   align-items: center;
+  font-size: 13px;
+}
+.emailRow__time {
   font-size: 13px;
 }
 .emailRow__message > h4 {

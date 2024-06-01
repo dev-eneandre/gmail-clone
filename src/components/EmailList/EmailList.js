@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./EmailList.css";
+import RefreshOutlinedIcon from "@mui/icons-material/RefreshOutlined";
 import { Checkbox, IconButton } from "@mui/material";
 import {
   ArrowDropDown,
@@ -7,7 +8,6 @@ import {
   ChevronRight,
   KeyboardHide,
   MoreVert,
-  Redo,
   Settings,
   Inbox,
   People,
@@ -24,25 +24,22 @@ const EmailList = () => {
   const emailCollectionRef = collection(db, "emails");
 
   useEffect(() => {
-    const getEmailList = async () => {
-      try {
-        const data = await getDocs(emailCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setEmails(filteredData);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
     getEmailList();
   }, [emailCollectionRef]);
 
-  useEffect(() => {
-    console.log(emails);
-  }, []);
+  const getEmailList = async () => {
+    try {
+      const data = await getDocs(emailCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setEmails(filteredData);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className="emailList">
       <div className="emailList__settings">
@@ -51,8 +48,8 @@ const EmailList = () => {
           <IconButton>
             <ArrowDropDown />
           </IconButton>
-          <IconButton>
-            <Redo />
+          <IconButton onClick={() => getEmailList()}>
+            <RefreshOutlinedIcon />
           </IconButton>
           <IconButton>
             <MoreVert />

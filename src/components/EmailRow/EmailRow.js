@@ -15,25 +15,25 @@ const EmailRow = ({ id, title, subject, description, time }) => {
     navigate("/mail");
   };
   return (
-    <div className="emailRow" onClick={openMail}>
+    <div className="emailRow">
       <div className="emailRow__options">
-        <Checkbox />
-
         <IconButton>
-          <StarBorderOutlined />
+          <Checkbox className="emailRow__options__icon" size="small" />
         </IconButton>
         <IconButton>
-          <LabelImportant />
+          <StarBorderOutlined className="emailRow__options__icon" />
         </IconButton>
       </div>
-      <div className="emailRow__title">{title}</div>
-      <div className="emailRow__message">
-        <h4>
-          {subject}
-          <span className="emailRow__description"> - {description}</span>
-        </h4>
+      <div className="emailRow__message__container" onClick={openMail}>
+        <div className="emailRow__title">{title}</div>
+        <div className="emailRow__message">
+          <h4>
+            {subject}
+            <span className="emailRow__description"> - {description}</span>
+          </h4>
+        </div>
+        <p className="emailRow__time">{time}</p>
       </div>
-      <p className="emailRow__time">{time}</p>
     </div>
   );
 };

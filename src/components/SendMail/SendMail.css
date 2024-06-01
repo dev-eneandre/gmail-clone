@@ -2,9 +2,9 @@
   position: absolute;
   bottom: 0px;
   right: 50px;
-  background-color: #404040;
+  background-color: #F2F6FC;
   width: 40%;
-  height: 40%;
+  height: 70%;
   max-width: 500px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -21,7 +21,7 @@
   color: gray;
 }
 .sendMail__header > h3 {
-  color: whitesmoke;
+  color: rgb(93, 93, 93);
   font-size: 13px;
 }
 .sendMail__send {
@@ -44,11 +44,22 @@
   padding: 2px;
 }
 .sendMail > form > input {
-  height: 30px;
+  height: 20px;
+  padding: 6px 10px;
+  border: none;
+  border-bottom: 1px solid whitesmoke;
+  outline: none;
+}
+.sendMail > form > input::placeholder,
+.sendMail > form > textarea::placeholder {
+  color: #918f8f;
+}
+.sendMail > form > textarea {
   padding: 10px;
   border: none;
   border-bottom: 1px solid whitesmoke;
   outline: none;
+  resize: none;
 }
 .sendMail__message {
   flex: 1;

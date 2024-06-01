@@ -61,9 +61,9 @@ const SendMail = () => {
         {errors?.subject && (
           <p className="sendMail__error">Subject is required!</p>
         )}
-        <input
+        <textarea
           {...register("message", { required: true })}
-          placeholder="..."
+          placeholder=""
           type="text"
           className="sendMail__message"
         />
